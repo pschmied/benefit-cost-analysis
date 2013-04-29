@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block sectionid %}unreliability{% endblock %}
+{% block content %}
+<p><a href="/restart">Start Over</a></p>
+<fieldset>
+<legend>Update Unreliability Defaults</legend>
+    {% if updated %}
+        <p>Unreliability update successful</p>
+    {% endif %}
+    <form method="post" action=".">
+    <table class="input">
+        {{ form }}
+    </table>
+    <p><input type="submit" name="_update_unreliability" value="Committ Unreliability Default Overrides"></p>
+    </form>
+</fieldset>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block sectionid %}distance{% endblock %}
+{% block content %}
+<p><a href="/restart">Start Over</a></p>
+<fieldset>
+<legend>Update Distance Defaults</legend>
+    <h3>Year 2000 dollars per Mile</h3>
+    {% if updated %}
+        <p>Distance update successful</p>
+    {% endif %}
+    <form method="post" action=".">
+    <table class="input">
+        {{ form }}
+    </table>
+    <p><input type="submit" name="_update_distance" value="Commit Distance Default Overrides"></p>
+    </form>
+</fieldset>
+{% endblock %}

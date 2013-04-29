@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "- //W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/TD/xhtml1l-transitional.dtd" >
+<html>
+    <head>
+        <title>PSRC</title>
+        <link href="/media/styles.css" type="text/css" rel="stylesheet" media="screen" />
+        <!--[if IE]>
+            <link href="/media/iehacks.css" type="text/css" rel="stylesheet" media="screen" />
+        <![endif] -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+    </head>
+
+    <body id="{% block sectionid %}generic{% endblock %}">
+    <div id="container">
+        <div id="header">
+            <h1>PSRC</h1>
+        </div>
+        <div id="banner"><h2>Least Cost Planning Tool</div>
+		<div id="content">
+        	{% block content %}
+        	{% endblock %}
+        </div>
+        
+        
+        <div id="footer">
+            {% block footer %}
+            <p class="breadcrumb"><a href="http://www.psrc.org/">&copy;PSRC</a> Created by <a href="http://www.econw.com/">ECONorthwest</a></p>
+            {% endblock %}
+        </div>
+        
+    </div>
+    </body>
+</html>

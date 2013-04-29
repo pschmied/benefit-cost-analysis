@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block sectionid %}main{% endblock %}
+{% block content %}
+<p><a href="/restart">Start Over</a></p>
+<fieldset>
+<legend>Update Analysis Information</legend>
+    {% if updated %}
+        <p>Analysis update successful</p>
+    {% endif %}
+    <form method="post" action=".">
+    <table class="input">
+        <tr>
+            <th><label for="id_scenario">Scenario:</label></th>
+            <td>{{ form.scenario }}</td>
+            <td>{{ form.scenario.help_text }}</td>
+        </tr>
+        <tr>
+            <th><label for="id_region">Region:</label></th>
+            <td>{{ form.region_id }}<br /><a href="/region/add">Create New Region</a></td>
+            <td>{{ form.region_id.help_text }}</td>
+        </tr>
+        <tr>
+            <th><label for="id_title">Title:</label></th>
+            <td>{{ form.title }}</td>
+            <td>{{ form.title.help_text }}</td>
+        </tr>
+        <tr>
+            <th><label for="id_analyst_name">Analyst Name:</label></th>
+            <td>{{ form.analyst_name }}</td>
+            <td>{{ form.analyst_name.help_text }}</td>
+        </tr>
+        <tr>
+            <th><label for="id_inflation_rate">Inflation Rate:</label></th>
+            <td>{{ form.inflation_rate }}</td>
+            <td>{{ form.inflation_rate.help_text }}</td>
+        </tr>
+        <tr>
+            <th><label for="id_fraction_of_base">Fraction of Base:</label></th>
+            <td>{{ form.fraction_of_base }}</td>
+            <td>{{ form.fraction_of_base.help_text }}</td>
+        </tr>
+        <tr>
+            <th><label for="id_real_discount_rate">Real Discount Rate:</label></th>
+            <td>{{ form.real_discount_rate }}</td>
+            <td>{{ form.real_discount_rate.help_text }}</td>
+        </tr>
+        <tr>
+            <th><label for="id_growth_rate">Growth Rate:</label></th>
+            <td>{{ form.growth_rate }}</td>
+            <td>{{ form.growth_rate.help_text }}</td>
+        </tr>
+        <tr>
+            <th><label for="id_end_year">End Year:</label></th>
+            <td>{{ form.end_year }}</td>
+            <td>{{ form.end_year.help_text }}</td>
+        </tr>
+    </table>
+    <p><input type="submit" name="_update_analysis" value="Update Analysis"></p>
+    <p><input type="submit" name="_edit_time" value="Override Value of Time Defaults"></p>
+    <p><input type="submit" name="_edit_distance" value="Override Operating Cost Defaults"></p>
+    {% comment %}<p><input type="submit" name="_edit_unreliability" value="Override Unreliability Defaults"></p>{% endcomment %}
+    <p><input type="submit" name="_edit_safety" value="Override Safety Defaults"></p>
+    <p><input type="submit" name="_edit_emissions" value="Override Emission Defaults"></p>
+    <p><input type="submit" name="_calculate_results" value="Calculate Results"></p>
+    </form>
+</fieldset>
+{% endblock %}

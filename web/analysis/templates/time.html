@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block sectionid %}time{% endblock %}
+{% block content %}
+<p><a href="/restart">Start Over</a></p>
+<fieldset>
+<legend>Update Time Defaults</legend>
+    {% if updated %}
+        <p>Time update successful</p>
+    {% endif %}
+    {{ form.errors }}
+    <h3>Values of Time in Year 2000 Dollars</h3>
+    <form method="post" action=".">
+    <table class="report">
+        <tr>
+            <th>Field</th><th>AM</th><th>MD</th><th>PM</th><th>EV</th><th>NI</th>
+        </tr>
+        {% regroup form_rows by field as row_list %}
+        {% for row in row_list %}
+            {% for cell in row.list %}
+                <tr>
+                    <td>{{ cell.field }}</td>
+                    <td>{{ cell.am }}</td>
+                    <td>{{ cell.md }}</td>
+                    <td>{{ cell.pm }}</td>
+                    <td>{{ cell.ev }}</td>
+                    <td>{{ cell.ni }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+    <p><input type="submit" name="_update_time" value="Committ Time Default Overrides"></p>
+    </form>
+</fieldset>
+{% endblock %}

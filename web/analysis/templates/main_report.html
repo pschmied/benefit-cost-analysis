@@ -1,0 +1,77 @@
+{% extends "report.html" %}
+{% load custom_filters %}
+{% block report %}
+<div id="main_report">
+	<h2>Main Summary Report - {{ analysis.title }}</h2>
+	<h3>Prepared for {{ analysis.analyst_name }} on {% now "F j, Y h:i a" %}</h3>
+	<h4>Summary Results for Full Region</h4>
+	<table class="report">
+		<tr>
+			<th>Year</th>
+			<th>User Benefit</th>
+			<th>Change in Toll Revenues</th>
+			<th>Change in VMT</th>
+			<th>Change in VHT</th>
+		</tr>
+		{% for result in full_region_results %}
+			<tr>
+				<td>{{ result.year }}</td>
+				<td>${{ result.user_benefit|commify }}</td>
+				<td>${{ result.toll_revenue|commify }}</td>
+				<td>{{ result.change_vmt|commify }}</td>
+				<td>{{ result.change_vht|commify }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	<p>Present Value of User Benefits (In ${% now "Y" %}): <strong>${{ full_region_benefit_npv|commify }}</strong></p>
+	{% if subregion_results %}
+		<h4>Summary Results for {{ analysis.region }}</h4>
+		<table class="report">
+			<tr>
+				<th>Year</th>
+				<th>User Benefit</th>
+				<th>Change in Toll Revenues</th>
+				<th>Change in VMT</th>
+				<th>Change in VHT</th>
+			</tr>
+			{% for result in subregion_results %}
+				<tr>
+					<td>{{ result.year }}</td>
+					<td>${{ result.user_benefit|commify }}</td>
+					<td>${{ result.toll_revenue|commify }}</td>
+					<td>{{ result.change_vmt|commify }}</td>
+					<td>{{ result.change_vht|commify }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<p>Present Value of User Benefits (In ${% now "Y" %}): <strong>${{ subregion_benefit_npv|commify }}</strong></p>
+	{% endif %}
+	{% if overrides %}
+		<h4>Parameter values that were overridden:</h4>
+		<table class="report">
+			<tr>
+				<th>Parameter</th>
+				<th>Default Value</th>
+				<th>Override Value</th>
+			</tr>
+			{% for p in overrides %}
+				<tr>
+					<td>{{ p.parameter }}</td>
+					<td>{{ p.default }}</td>
+					<td>{{ p.override }}</td>
+				</tr>
+			{% endfor %}
+		<table>
+	{% endif %}
+	<p><form><input type="button" value=" Print Report "onclick="window.print();return false;" /></form></p>
+</div>
+<fieldset>
+<legend>Results in .csv format</legend>
+    <p>
+        <a href="/benefits_csv">Benefits</a><br />
+        <a href="/accounting_csv">Accounting</a><br />
+        <a href="/safety_csv">Safety</a><br />
+        <a href="/emissions_csv">Emissions</a>
+    </p>
+</fieldset>
+{% endblock %}

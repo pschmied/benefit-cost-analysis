@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block sectionid %}emissions{% endblock %}
+{% block content %}
+<p><a href="/restart">Start Over</a></p>
+<fieldset>
+<legend>Update Emission Defaults</legend>
+<form method="post" action=".">
+<h3>Emmision Cost Defaults</h3>
+    <table class="report">
+        <tr>
+            <th>Pollutant</th>
+            <th>Cost per Metric Ton</th>
+        </tr>
+        {% for row in cost_form_rows %}
+            <tr>
+                <td>{{ row.p }}
+                <td>{{ row.cost }}
+            </tr>
+        {% endfor %}
+    </table>
+<h3>Emission Rate Defaults</h3>
+    <table class="report">
+        <tr>
+            <th>Pollutant</th><th>Speed Class</th><th>Car</th><th>Light Truck</th><th>Medium Truck</th><th>Heavy Truck</th>
+        </tr>
+        {% regroup form_rows by p as row_list %}
+        {% for row in row_list %}
+            {% for cell in row.list %}
+                <tr>
+                    <td>{{ cell.p }}</td>
+                    <td>{{ cell.speed }}</td>
+                    <td>{{ cell.car }}</td>
+                    <td>{{ cell.light_truck }}</td>
+                    <td>{{ cell.medium_truck }}</td>
+                    <td>{{ cell.heavy_truck }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        
+    </table>
+    <p><input type="submit" name="_update_emissions" value="Update Emission Defaults"></p>
+    </form>
+</fieldset>
+{% endblock %}

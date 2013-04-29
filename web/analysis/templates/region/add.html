@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block sectionid %}add_region{% endblock %}
+{% block content %}
+<fieldset>
+<legend>Create New Region</legend>
+    <form method="post" action=".">
+    <table>
+        {{ form }}
+    </table>
+    <input type="submit" name="_add_region" value="Create">
+    </form>
+</fieldset>
+{% endblock %}

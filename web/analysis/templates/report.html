@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+{% block sectionid %}main{% endblock %}
+{% block content %}
+<p><a href="/">Edit Analysis</a> | <a href="/restart">Start Over</a></p>
+<p>
+    <form action="." method="post">
+        <input type="submit" value="Main Summary Report" name="_get_main_report" />
+        <input type="submit" value="Benefit Type Report" name= "_get_benefit_type_report" />
+        <input type="submit" value="Time-of-Day Report" name= "_get_tod_report" />
+        <input type="submit" value="User Class Report" name= "_get_user_class_report" />
+        <input type="submit" value="Emissions Report" name= "_get_emissions_report" />
+        <input type="submit" value="Safety Report" name= "_get_safety_report" />
+    </form>
+</p>
+{% block report %}{% endblock %}
+{% endblock %}

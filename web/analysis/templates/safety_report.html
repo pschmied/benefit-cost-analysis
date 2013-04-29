@@ -1,0 +1,31 @@
+{% extends "report.html" %}
+{% load custom_filters %}
+{% block report %}
+<div id="main_report">
+	<h2>Safety Report - {{ analysis.title }}</h2>
+	<h3>Prepared for {{ analysis.analyst_name }} on {% now "F j, Y h:i a" %}</h3>
+	<h4>Summary Results for Full Region</h4>
+
+	<table class="report">
+		<tr>
+			<th>Year</th>
+			<th>Property Damage Only</th>
+			<th>Injury</th>
+			<th>Fatality</th>
+			<th>Total</th>
+		</tr>
+		{% for result in full_region_results %}
+			<tr>
+				<td>{{ result.year }}</td>
+                <td>${{ result.property_damage_only|commify }}</td>
+                <td>${{ result.injury|commify }}</td>
+                <td>${{ result.fatality|commify }}</td>
+                <td>${{ result.total|commify }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+	<p><form><input type="button" value=" Print Report "onclick="window.print();return false;" /></form></p>
+</div>
+
+{% endblock %}

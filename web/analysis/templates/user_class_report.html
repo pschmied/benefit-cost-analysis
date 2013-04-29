@@ -1,0 +1,134 @@
+{% extends "report.html" %}
+{% load custom_filters %}
+{% block report %}
+<div id="main_report">
+	<h2>Summary by User Class Report - {{ analysis.title }}</h2>
+	<h3>Prepared for {{ analysis.analyst_name }} on {% now "F j, Y h:i a" %}</h3>
+	<h4>Summary Results for Full Region</h4>
+	<table class="report">
+		<tr>
+			<th>Year</th>
+			<th>all_sr2</th>
+			<th>all_sr3</th>
+			<th>hbw_da_1</th>
+			<th>hbw_da_2</th>
+			<th>hbw_da_3</th>
+			<th>hbw_da_4</th>
+			<th>hbw_dat</th>
+			<th>hbw_wat</th>
+		</tr>
+		{% for result in full_region_results %}
+			<tr>
+			    {% if forloop.last %}
+				    <td>Present Value (In ${% now "Y" %})</td>
+				{% else %}
+				    <td>{{ result.year }}</td>
+				{% endif %}
+				<td>${{ result.all_sr2|commify }}</td>
+                <td>${{ result.all_sr3|commify }}</td>
+                <td>${{ result.hbw_da_1|commify }}</td>
+                <td>${{ result.hbw_da_2|commify }}</td>
+                <td>${{ result.hbw_da_3|commify }}</td>
+                <td>${{ result.hbw_da_4|commify }}</td>
+                <td>${{ result.hbw_dat|commify }}</td>
+                <td>${{ result.hbw_wat|commify }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	<table class="report">
+		<tr>
+			<th>Year</th>
+			<th>hv_truck</th>
+			<th>lt_truck</th>
+			<th>md_truck</th>
+			<th>nhbw_da</th>
+			<th>nhbw_wat</th>
+			<th>vanpool</th>
+			<th>walk</th>
+			<th>all</th>
+		</tr>
+		{% for result in full_region_results %}
+			<tr>
+			    {% if forloop.last %}
+				    <td>Present Value (In ${% now "Y" %})</td>
+				{% else %}
+				    <td>{{ result.year }}</td>
+				{% endif %}
+                <td>${{ result.hv_truck|commify }}</td>
+                <td>${{ result.lt_truck|commify }}</td>
+                <td>${{ result.md_truck|commify }}</td>
+                <td>${{ result.nhbw_da|commify }}</td>
+                <td>${{ result.nhbw_wat|commify }}</td>
+                <td>${{ result.vanpool|commify }}</td>
+                <td>${{ result.walk|commify }}</td>
+                <td>${{ result.all|commify }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	{% if subregion_results %}
+		<h4>Summary Results for {{ analysis.region }}</h4>
+		<table class="report">
+			<tr>
+    			<th>Year</th>
+    			<th>all_sr2</th>
+    			<th>all_sr3</th>
+    			<th>hbw_da_1</th>
+    			<th>hbw_da_2</th>
+    			<th>hbw_da_3</th>
+    			<th>hbw_da_4</th>
+    			<th>hbw_dat</th>
+    			<th>hbw_wat</th>
+    		</tr>
+			{% for result in subregion_results %}
+				<tr>
+    			    {% if forloop.last %}
+    				    <td>Present Value (In ${% now "Y" %})</td>
+    				{% else %}
+    				    <td>{{ result.year }}</td>
+    				{% endif %}
+    				<td>${{ result.all_sr2|commify }}</td>
+                    <td>${{ result.all_sr3|commify }}</td>
+                    <td>${{ result.hbw_da_1|commify }}</td>
+                    <td>${{ result.hbw_da_2|commify }}</td>
+                    <td>${{ result.hbw_da_3|commify }}</td>
+                    <td>${{ result.hbw_da_4|commify }}</td>
+                    <td>${{ result.hbw_dat|commify }}</td>
+                    <td>${{ result.hbw_wat|commify }}</td>
+    			</tr>
+			{% endfor %}
+		</table>
+		<table class="report">
+			<tr>
+    			<th>Year</th>
+    			<th>hv_truck</th>
+    			<th>lt_truck</th>
+    			<th>md_truck</th>
+    			<th>nhbw_da</th>
+    			<th>nhbw_wat</th>
+    			<th>vanpool</th>
+    			<th>walk</th>
+    			<th>all</th>
+    		</tr>
+			{% for result in subregion_results %}
+				<tr>
+    			    {% if forloop.last %}
+    				    <td>Present Value (In ${% now "Y" %})</td>
+    				{% else %}
+    				    <td>{{ result.year }}</td>
+    				{% endif %}
+                    <td>${{ result.hv_truck|commify }}</td>
+                    <td>${{ result.lt_truck|commify }}</td>
+                    <td>${{ result.md_truck|commify }}</td>
+                    <td>${{ result.nhbw_da|commify }}</td>
+                    <td>${{ result.nhbw_wat|commify }}</td>
+                    <td>${{ result.vanpool|commify }}</td>
+                    <td>${{ result.walk|commify }}</td>
+                    <td>${{ result.all|commify }}</td>
+    			</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+	<p><form><input type="button" value=" Print Report "onclick="window.print();return false;" /></form></p>
+</div>
+
+{% endblock %}

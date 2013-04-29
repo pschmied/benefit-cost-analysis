@@ -1,0 +1,66 @@
+{% extends "report.html" %}
+{% load custom_filters %}
+{% block report %}
+<div id="main_report">
+	<h2>Summary by Benefit Type Report - {{ analysis.title }}</h2>
+	<h3>Prepared for {{ analysis.analyst_name }} on {% now "F j, Y h:i a" %}</h3>
+	<h4>Summary Results for Full Region</h4>
+	<table class="report">
+		<tr>
+			<th>Year</th>
+			<th>Time Benefit</th>
+			<th>Operating Cost Benefit</th>
+			<th>Fare Benefit</th>
+			<th>Toll Benefit</th>
+			<th>Parking Benefit</th>
+			<th>Unreliability Benefit</th>
+		</tr>
+		{% for result in full_region_results %}
+			<tr>
+			    {% if forloop.last %}
+				    <td>Present Value (In ${% now "Y" %})</td>
+				{% else %}
+				    <td>{{ result.year }}</td>
+				{% endif %}
+				<td>${{ result.time_benefit|commify }}</td>
+				<td>${{ result.operating_cost_benefit|commify }}</td>
+				<td>${{ result.fare_benefit|commify }}</td>
+				<td>${{ result.toll_benefit|commify }}</td>
+				<td>${{ result.parking_benefit|commify }}</td>
+				<td>${{ result.unreliability_benefit|commify }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	{% if subregion_results %}
+		<h4>Summary Results for {{ analysis.region }}</h4>
+		<table class="report">
+			<tr>
+    			<th>Year</th>
+    			<th>Time Benefit</th>
+    			<th>Operating Cost Benefit</th>
+    			<th>Fare Benefit</th>
+    			<th>Toll Benefit</th>
+    			<th>Parking Benefit</th>
+    			<th>Unreliability Benefit</th>
+    		</tr>
+			{% for result in subregion_results %}
+				<tr>
+    			    {% if forloop.last %}
+    				    <td>Present Value (In ${% now "Y" %})</td>
+    				{% else %}
+    				    <td>{{ result.year }}</td>
+    				{% endif %}
+    				<td>${{ result.time_benefit|commify }}</td>
+    				<td>${{ result.operating_cost_benefit|commify }}</td>
+    				<td>${{ result.fare_benefit|commify }}</td>
+    				<td>${{ result.toll_benefit|commify }}</td>
+    				<td>${{ result.parking_benefit|commify }}</td>
+    				<td>${{ result.unreliability_benefit|commify }}</td>
+    			</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+	<p><form><input type="button" value=" Print Report "onclick="window.print();return false;" /></form></p>
+</div>
+
+{% endblock %}

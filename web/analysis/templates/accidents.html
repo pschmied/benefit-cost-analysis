@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block sectionid %}safety{% endblock %}
+{% block content %}
+<p><a href="/restart">Start Over</a></p>
+<fieldset>
+<legend>Update Safety Defaults</legend>
+    
+    {% if updated %}
+        <p>Safety update successful</p>
+    {% endif %}
+    <form method="post" action=".">
+    <h3>Cost Per Accident Defaults</h3>
+    <table class="report">
+        <tr><th>Accident Type</th><th>Cost per Accident</th></tr>
+        <tr><td>Property Damage Only</td><td>{{ cost_form.property_damage_only }}</td></tr>
+        <tr><td>Injury</td><td>{{ cost_form.injury }}</td></tr>
+        <tr><td>Fatality</td><td>{{ cost_form.fatality }}</td></tr>
+    </table>
+    <h3>Accident Rate Defaults</h3>
+    <table class="report">
+        <tr>
+            <th>VC Range</th><th>Functional Class</th><th>Property Damage Only</th><th>Injury</th><th>Fatality</th>
+        </tr>
+        {% regroup form_rows by vc as row_list %}
+        {% for row in row_list %}
+            {% for cell in row.list %}
+                <tr>
+                    <td>{{ cell.vc }}</td>
+                    <td>{{ cell.fc }}</td>
+                    <td>{{ cell.property_damage_only }}</td>
+                    <td>{{ cell.injury }}</td>
+                    <td>{{ cell.fatality }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        
+    </table>
+    <p><input type="submit" name="_update_safety" value="Update Safety Defaults"></p>
+    </form>
+</fieldset>
+{% endblock %}

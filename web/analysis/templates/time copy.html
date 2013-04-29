@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block sectionid %}time{% endblock %}
+{% block content %}
+<p><a href="/restart">Start Over</a></p>
+<fieldset>
+<legend>Update Time Defaults</legend>
+    {% if updated %}
+        <p>Time update successful</p>
+    {% endif %}
+    <form method="post" action=".">
+    <table class="input">
+        {{ form }}
+    </table>
+    <p><input type="submit" name="_update_time" value="Committ Time Default Overrides"></p>
+    </form>
+</fieldset>
+{% endblock %}
